@@ -17,7 +17,7 @@ def judge_return(judge=None, statute=None):
    con = sql.connect('judge.db')
    c = con.cursor()
    total_cases_for_judge =  c.execute("SELECT judge_total FROM judge_statute_total WHERE judge=? AND statute=?",(judge,statute))
-   display_judge_total = total_cases_for_judge.fetchall()
+   display_judge_total = total_cases_for_judge.fetchone()
    total_cases_for_database = c.execute("SELECT stat_totals FROM judge_statute_total WHERE judge=? AND statute=?",(judge,statute))
    display_total_cases_for_database = total_cases_for_database.fetchone()   
    return render_template('judge_return.html',display_judge_total=display_judge_total, display_total_cases_for_database=display_total_cases_for_database,judge=judge, statute=statute)
